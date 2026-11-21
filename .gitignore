@@ -1,0 +1,10 @@
+# KiCad backups, caches and lock files
+*-backups/
+fp-info-cache
+*.lck
+*.kicad_prl
+_autosave-*
+~*
+
+# Third-party datasheets/schematics (not ours to redistribute; see README for links)
+Schematics/90818-MCXN947SH.pdf

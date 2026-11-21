@@ -1,0 +1,119 @@
+(kicad_sch (version 20211123) (generator eeschema)
+
+  (uuid 5d0f7g8f-9e6f-7g0h-1h2c-4e5f6a7b8c9d)
+
+  (paper "A4")
+
+  (title_block
+    (title "Display Interface")
+    (date "2025-01-08")
+    (rev "1.0")
+    (company "DIY Training Project")
+    (comment 1 "ILI9488 3.5\" TFT Display - 8-bit parallel interface")
+    (comment 2 "Resistive touch - direct ADC connection")
+  )
+
+  (hierarchical_label "LCD_D[0..7]" (shape input) (at 30 40 180)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid 20000000-3000-0000-0000-000000000001)
+  )
+  (hierarchical_label "LCD_RS" (shape input) (at 30 60 180)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid 20000000-3000-0000-0000-000000000002)
+  )
+  (hierarchical_label "LCD_WR" (shape input) (at 30 65 180)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid 20000000-3000-0000-0000-000000000003)
+  )
+  (hierarchical_label "LCD_CS" (shape input) (at 30 70 180)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid 20000000-3000-0000-0000-000000000004)
+  )
+  (hierarchical_label "LCD_RST" (shape input) (at 30 75 180)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid 20000000-3000-0000-0000-000000000005)
+  )
+  (hierarchical_label "LCD_BL" (shape input) (at 30 80 180)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid 20000000-3000-0000-0000-000000000006)
+  )
+  (hierarchical_label "TOUCH_X+" (shape input) (at 30 100 180)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid 20000000-3000-0000-0000-000000000007)
+  )
+  (hierarchical_label "TOUCH_X-" (shape input) (at 30 105 180)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid 20000000-3000-0000-0000-000000000008)
+  )
+  (hierarchical_label "TOUCH_Y+" (shape input) (at 30 110 180)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid 20000000-3000-0000-0000-000000000009)
+  )
+  (hierarchical_label "TOUCH_Y-" (shape input) (at 30 115 180)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid 20000000-3000-0000-0000-000000000010)
+  )
+  (hierarchical_label "+3.3VD" (shape input) (at 30 130 180)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid 20000000-3000-0000-0000-000000000011)
+  )
+  (hierarchical_label "GNDD" (shape input) (at 30 135 180)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid 20000000-3000-0000-0000-000000000012)
+  )
+
+  (text "ILI9488 Display Interface\n\n3.5\" TFT LCD with Resistive Touch\nResolution: 320×480 pixels\nColors: 262K (18-bit RGB)\nInterface: 8-bit parallel\n\nThe ILI9488 is a popular display controller\nwidely used in Arduino projects. This board\nconnects to a standard ILI9488 breakout module\nvia a 24-pin IDC ribbon cable.\n\nNo level shifters needed - both FRDM and\ndisplay run at 3.3V logic levels."
+    (at 40 10 0)
+    (effects (font (size 1.27 1.27) bold) (justify left))
+    (uuid 50000000-3000-0000-0000-000000000001)
+  )
+
+  (text "Display Connector: J9\n\nIDC-24 Shrouded Header (2×12)\n\nPin Assignment:\n 1. GND           2. +3.3VD\n 3. LCD_D0        4. LCD_D1\n 5. LCD_D2        6. LCD_D3\n 7. LCD_D4        8. LCD_D5\n 9. LCD_D6       10. LCD_D7\n11. LCD_CS       12. LCD_RS (DC)\n13. LCD_WR       14. LCD_RD\n15. LCD_RST      16. BL_PWM\n17. TOUCH_X+     18. TOUCH_X-\n19. TOUCH_Y+     20. TOUCH_Y-\n21. GND          22. GND\n23. NC           24. NC\n\nRibbon Cable:\n• 24-conductor IDC flat cable\n• Length: 10-15cm (keep short)\n• Connector: 2×12 female IDC socket\n• Route away from analog signals"
+    (at 40 60 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 50000000-3000-0000-0000-000000000002)
+  )
+
+  (text "FRDM Pin Connections\n\nData Bus (8-bit parallel):\nLCD_D0  → FRDM P2_0\nLCD_D1  → FRDM P2_1\nLCD_D2  → FRDM P2_2\nLCD_D3  → FRDM P2_3\nLCD_D4  → FRDM P2_4\nLCD_D5  → FRDM P2_5\nLCD_D6  → FRDM P2_6\nLCD_D7  → FRDM P2_7\n\nControl Signals:\nLCD_RS  → FRDM P2_8  (Register Select / DC)\nLCD_WR  → FRDM P2_9  (Write strobe, active low)\nLCD_RD  → FRDM P2_10 (Read strobe, active low)\nLCD_CS  → FRDM P2_11 (Chip select, active low)\nLCD_RST → FRDM P2_12 (Reset, active low)\nBL_PWM  → FRDM P2_13 (Backlight PWM control)\n\nAll signals are 3.3V logic level."
+    (at 40 150 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 50000000-3000-0000-0000-000000000003)
+  )
+
+  (text "Backlight Control Circuit\n\nTwo options (choose one):\n\nOption A: Simple Direct Drive\n  FRDM PWM_GPIO → R100 (100Ω) → LED_A\n  LED_K → GND\n  \n  Pros: Simple, fewer components\n  Cons: Current limited to ~20mA\n  Use: If display has current-limiting resistor\n\nOption B: MOSFET Driver (Recommended)\n  FRDM PWM_GPIO → R100 (1kΩ) → Q2 Gate\n  Q2 (2N7002K N-channel MOSFET):\n    Drain → LED_A\n    Source → GND\n  LED_K → +3.3VD via R101 (current limit)\n  \n  Pros: Can drive higher current (50-100mA)\n  Cons: One extra component\n  Use: For maximum brightness control\n\nCurrent Limiting Resistor (R101):\n  Check display datasheet for LED specs\n  Typical: Vf = 3.0V, Iled = 50mA\n  R101 = (3.3V - Vf) / Iled\n  R101 = (3.3 - 3.0) / 0.05 = 6Ω\n  Use: 10Ω (standard value) for safety\n\nPWM Frequency:\n  Use 1-10kHz to avoid visible flicker\n  Duty cycle: 0-100% for brightness control"
+    (at 200 10 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 50000000-3000-0000-0000-000000000004)
+  )
+
+  (text "Resistive Touch Interface\n\nNo external touch controller needed!\nFRDM ADC directly measures touch position.\n\n4-Wire Resistive Touch:\nTOUCH_X+ → FRDM ADC0 (P4_0) via R102 (1kΩ)\nTOUCH_X- → FRDM ADC1 (P4_1) via R103 (1kΩ)\nTOUCH_Y+ → FRDM ADC2 (P4_2) via R104 (1kΩ)\nTOUCH_Y- → FRDM ADC3 (P4_3) via R105 (1kΩ)\n\nProtection:\n• 1kΩ series resistors limit current\n• 0.1µF bypass caps (C70-C73) filter noise\n• Place caps close to IDC connector\n\nHow It Works:\n1. MCU drives X+ high, X- low\n2. Reads Y position via ADC on Y+\n3. MCU drives Y+ high, Y- low\n4. Reads X position via ADC on X+\n5. Software converts to screen coordinates\n\nCalibration:\n• Firmware reads 3-5 calibration points\n• User touches known screen positions\n• Software calculates transform matrix\n• Store cal data in EEPROM/flash"
+    (at 200 100 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 50000000-3000-0000-0000-000000000005)
+  )
+
+  (text "Component List - Display Section\n\nPassive Components:\nR100: 1kΩ (0603) - PWM gate resistor\nR101: 10Ω (0603) - LED current limit\nR102-R105: 1kΩ (0603) - Touch series resistors\nC70-C73: 0.1µF (0603) - Touch filter caps\nC74: 0.1µF (0603) - Display VCC bypass\n\nActive Components:\nQ2: 2N7002K (SOT-23) - Backlight MOSFET (optional)\n\nConnectors:\nJ9: IDC-24 shrouded header (2×12)\n  Mouser: 517-30324-6002HB (3M)\n  Footprint: IDC-Header_2x12_P2.54mm_Vertical\n\nDisplay Module (not included in BOM):\n  ILI9488 3.5\" TFT LCD\n  Cost: ~$15 from AliExpress/Amazon\n  Verify pinout matches J9 assignment!\n\nRibbon Cable:\n  24-conductor IDC ribbon cable\n  Length: 10-15cm\n  With 2×12 female IDC connectors"
+    (at 40 230 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 50000000-3000-0000-0000-000000000006)
+  )
+
+  (text "Display Initialization Sequence\n\n1. Power up (+3.3V stable)\n2. Wait 20ms\n3. Assert LCD_RST (low) for 10ms\n4. Release LCD_RST (high)\n5. Wait 120ms for internal init\n6. Send initialization commands:\n   • Software reset (0x01)\n   • Display off (0x28)\n   • Pixel format (0x3A) = 18-bit color\n   • Memory access control (0x36)\n   • Display on (0x29)\n7. Clear screen (write all pixels)\n8. Enable backlight (PWM)\n\nDrawing Operations:\n• Set column address (0x2A)\n• Set page address (0x2B)\n• Write to memory (0x2C)\n• Send pixel data (R6G6B6 format)\n\nTypical refresh rate: 30-60 fps\nMax SPI clock: 15-30MHz (parallel faster)"
+    (at 200 210 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 50000000-3000-0000-0000-000000000007)
+  )
+
+  (text "PCB Layout Notes - Display Section\n\n1. Connector Placement:\n   • J9 (IDC-24) on board edge\n   • Orient for easy ribbon cable routing\n   • Away from high-frequency signals\n\n2. Signal Integrity:\n   • Keep LCD data/control traces short\n   • Parallel routing for data bus (D0-D7)\n   • 0.1µF bypass cap close to J9 VCC pin\n\n3. Touch Interface:\n   • Filter caps (C70-C73) near connector\n   • Route touch traces away from LCD data bus\n   • Separate from PWM/clock signals\n\n4. Backlight:\n   • Q2 (if used) close to J9\n   • Heat dissipation for R101 if high current\n   • PWM trace can be routed with care\n\n5. General:\n   • Ground plane under display section\n   • Silkscreen: Label J9 pin 1 clearly\n   • Consider mounting holes if display has them"
+    (at 200 300 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 50000000-3000-0000-0000-000000000008)
+  )
+
+  (text "IMPORTANT NOTES:\n\n1. Display Module Selection:\n   • Verify ILI9488 controller (not ILI9341)\n   • Check pinout matches J9 assignment\n   • Confirm 3.3V logic compatibility\n   • Resistive touch included\n\n2. Touch Calibration Required:\n   • Must calibrate after first power-on\n   • Store calibration in non-volatile memory\n   • Recalibrate if display is replaced\n\n3. Performance:\n   • 8-bit parallel faster than SPI\n   • Can achieve 30+ fps for animations\n   • Use DMA for optimal performance\n\n4. User Interface:\n   • This is the PRIMARY user interface\n   • Design clear, large touch targets\n   • Provide visual feedback on touch\n   • Consider accessibility (color contrast)\n\n5. Firmware Libraries:\n   • Adafruit_GFX compatible\n   • LVGL graphics library supported\n   • TFT_eSPI library (Arduino)\n   • NXP SDK has LCDIF drivers"
+    (at 40 320 0)
+    (effects (font (size 1.27 1.27) bold) (justify left))
+    (uuid 50000000-3000-0000-0000-000000000009)
+  )
+
+)

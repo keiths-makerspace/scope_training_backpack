@@ -1,0 +1,131 @@
+(kicad_sch (version 20211123) (generator eeschema)
+
+  (uuid 4c9e6f7e-8d5e-6f9g-0g1b-3d4e5f6a7b8c)
+
+  (paper "A3")
+
+  (title_block
+    (title "Digital Protocols Section")
+    (date "2025-01-08")
+    (rev "1.0")
+    (company "DIY Training Project")
+    (comment 1 "CAN (dual SMA), SPI, I2C, UART, Logic Analyzer")
+    (comment 2 "Updated: SMA6=CAN-H, SMA7=CAN-L for better scope training")
+  )
+
+  (hierarchical_label "SPI_CLK" (shape input) (at 30 40 180)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid 20000000-2000-0000-0000-000000000001)
+  )
+  (hierarchical_label "SPI_MOSI" (shape input) (at 30 45 180)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid 20000000-2000-0000-0000-000000000002)
+  )
+  (hierarchical_label "SPI_MISO" (shape output) (at 30 50 180)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid 20000000-2000-0000-0000-000000000003)
+  )
+  (hierarchical_label "SPI_CS" (shape input) (at 30 55 180)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid 20000000-2000-0000-0000-000000000004)
+  )
+  (hierarchical_label "I2C_SDA" (shape bidirectional) (at 30 70 180)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid 20000000-2000-0000-0000-000000000005)
+  )
+  (hierarchical_label "I2C_SCL" (shape input) (at 30 75 180)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid 20000000-2000-0000-0000-000000000006)
+  )
+  (hierarchical_label "UART_TX" (shape input) (at 30 90 180)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid 20000000-2000-0000-0000-000000000007)
+  )
+  (hierarchical_label "UART_RX" (shape output) (at 30 95 180)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid 20000000-2000-0000-0000-000000000008)
+  )
+  (hierarchical_label "CAN_TX" (shape input) (at 30 110 180)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid 20000000-2000-0000-0000-000000000009)
+  )
+  (hierarchical_label "CAN_RX" (shape output) (at 30 115 180)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid 20000000-2000-0000-0000-000000000010)
+  )
+  (hierarchical_label "+3.3VD" (shape input) (at 30 140 180)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid 20000000-2000-0000-0000-000000000011)
+  )
+  (hierarchical_label "GNDD" (shape input) (at 30 145 180)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid 20000000-2000-0000-0000-000000000012)
+  )
+
+  (text "DUAL CAN SMA CONFIGURATION\n\nâœ… UPDATED DESIGN - November 2025\n\nPreviously: Single differential CAN connector\nNow: Separate SMA6 (CAN-H) and SMA7 (CAN-L)\n\nWhy the change?\nBetter for oscilloscope training!\n• Students can probe each signal individually\n• Use standard scope probes (no differential probe needed)\n• Scope math (CH1-CH2) shows differential signal\n• Easier to see recessive vs dominant states\n• Termination effects clearly visible\n\nCAN Loopback Training:\n• MCU transmits CAN frames in loopback mode\n• Signals appear on CAN-H and CAN-L SMAs\n• MCU receives frames back internally\n• Students capture REAL CAN waveforms!\n• 90% of CAN training possible with one board"
+    (at 40 10 0)
+    (effects (font (size 1.27 1.27) bold) (justify left))
+    (uuid 50000000-2000-0000-0000-000000000001)
+  )
+
+  (text "MCP2562 CAN Transceiver Circuit\n\nU8: MCP2562T-E/SN (SOIC-8)\n\nPin Connections:\n1. TXD    → FRDM CAN_TX (P1_16)\n2. GND    → GNDD\n3. VDD    → +3.3VD (via 0.1µF bypass C61)\n4. RXD    → FRDM CAN_RX (P1_17)\n5. VREF   → No connect (internal reference)\n6. CANL   → CAN-L path (to SMA7)\n7. CANH   → CAN-H path (to SMA6)\n8. STBY   → GND (always active)\n\nBypass Capacitors:\nC61: 0.1µF (close to VDD pin)\nC62: 10µF (bulk capacitance)"
+    (at 40 80 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 50000000-2000-0000-0000-000000000002)
+  )
+
+  (text "CAN-H Path (MCP2562 Pin 7 → SMA6)\n\nProtection and Signal Conditioning:\n\n1. MCP2562T Pin 7 (CANH)\n   ↓\n2. R80: 49.9Ω series resistor\n   (Current limiting + 50Ω matching)\n   ↓\n3. D12: BAT54S Schottky diode\n   (Fast transient protection)\n   ↓\n4. D13: PESD5V0S1BL TVS diode\n   (ESD protection, bidirectional)\n   ↓\n5. SMA6 connector (edge-mount)\n   Label: \"CAN-H\"\n\nSignal Levels:\n• Recessive: 2.5V (both H and L at mid-rail)\n• Dominant:  3.5V (H high, L low)\n• Differential: ±1V when dominant"
+    (at 200 10 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 50000000-2000-0000-0000-000000000003)
+  )
+
+  (text "CAN-L Path (MCP2562 Pin 6 → SMA7)\n\nProtection and Signal Conditioning:\n\n1. MCP2562T Pin 6 (CANL)\n   ↓\n2. R81: 49.9Ω series resistor\n   (Current limiting + 50Ω matching)\n   ↓\n3. D14: BAT54S Schottky diode\n   (Fast transient protection)\n   ↓\n4. D15: PESD5V0S1BL TVS diode\n   (ESD protection, bidirectional)\n   ↓\n5. SMA7 connector (edge-mount)\n   Label: \"CAN-L\"\n\nSignal Levels:\n• Recessive: 2.5V (both H and L at mid-rail)\n• Dominant:  1.5V (H high, L low)\n• Differential: ±1V when dominant"
+    (at 200 80 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 50000000-2000-0000-0000-000000000004)
+  )
+
+  (text "CAN Bus Termination\n\nJP1: 2-pin jumper header\nR82: 120Ω resistor (1%, 0603)\n\nConnection:\nCANH ─┬─ R82 (120Ω) ─┬─ CANL\n      │               │\n      └─── JP1 ───────┘\n\nJumper Installed: 120Ω termination\n  • Proper for single node or end-of-bus\n  • Clean signals, fast edges (~50ns)\n  • Required for training demos!\n\nJumper Removed: No termination\n  • Poor signal quality (for comparison)\n  • Ringing, slow edges, reflections\n  • Shows WHY termination matters\n\nTraining Exercise:\n• Capture CAN frame with JP1 removed\n• Observe: ringing, noise\n• Install JP1\n• Capture same frame\n• Compare: clean, fast transitions\n• Students learn importance of proper termination!"
+    (at 200 150 0)
+    (effects (font (size 1.27 1.27) bold) (justify left))
+    (uuid 50000000-2000-0000-0000-000000000005)
+  )
+
+  (text "SPI Interface (via 74HC541 Buffer)\n\nU4: 74HC541PWR (TSSOP-20)\nOctal buffer with 3-state outputs\n\nSignals buffered:\n• SPI_CLK  (FRDM P1_0)\n• SPI_MOSI (FRDM P1_1)\n• SPI_MISO (FRDM P1_2)\n• SPI_CS   (FRDM P1_3)\n\nOutput: J6 (1x5 pin header)\nPin 1: GND\nPin 2: SPI_CLK\nPin 3: SPI_MOSI\nPin 4: SPI_MISO\nPin 5: SPI_CS\n\nTypical baud rates: 100kHz - 10MHz\nUse for protocol decoding exercises"
+    (at 40 160 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 50000000-2000-0000-0000-000000000006)
+  )
+
+  (text "I2C Interface (via 74HC541 Buffer)\n\nSignals buffered:\n• I2C_SDA  (FRDM P1_4, bidirectional)\n• I2C_SCL  (FRDM P1_5)\n\nPull-up resistors:\n• R50: 2.2kΩ on SDA line\n• R51: 2.2kΩ on SCL line\n  (to +3.3VD)\n\nOutput: J7 (1x3 pin header)\nPin 1: GND\nPin 2: I2C_SDA\nPin 3: I2C_SCL\n\nTypical speeds: 100kHz (standard), 400kHz (fast)\nConnect to I2C devices for protocol analysis"
+    (at 40 210 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 50000000-2000-0000-0000-000000000007)
+  )
+
+  (text "UART Interface (via 74HC541 Buffer)\n\nSignals buffered:\n• UART_TX  (FRDM P1_8)\n• UART_RX  (FRDM P1_9)\n\nOutput: J8 (1x3 pin header)\nPin 1: GND\nPin 2: UART_TX (3.3V logic)\nPin 3: UART_RX (3.3V logic)\n\nCommon baud rates:\n• 9600, 19200, 38400, 57600, 115200\n\nTraining exercises:\n• Serial protocol decoding\n• Baud rate measurement\n• Start/stop bit analysis\n• Parity checking\n\nNote: Use USB-TTL adapter or connect\nto another UART device for testing"
+    (at 40 255 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 50000000-2000-0000-0000-000000000008)
+  )
+
+  (text "Logic Analyzer / AD9851 Interface\n\nJ5: IDC-16 shrouded header (2×8)\nSoftware-switched dual mode:\n\nMode 1: AD9851 DDS Module\n• Clean sine wave generation\n• Frequency: 0.01Hz to 70MHz\n• Output via external SMA on module\n• Precision frequency training\n\nMode 2: Logic Analyzer Signals\n• 8 buffered digital channels\n• Protocol output (SPI, I2C, UART)\n• PWM signals for timing analysis\n• Multi-channel synchronous capture\n\nPin Assignment:\nPin 1-2:   +3.3VD, GND\nPin 3-10:  Data bits D0-D7\nPin 11-12: Control signals\nPin 13-14: Clock/Enable\nPin 15-16: GND\n\nMux Control:\nFRDM GPIO selects between modes\nNo hardware changes needed!"
+    (at 200 220 0)
+    (effects (font (size 1.27 1.27) bold) (justify left))
+    (uuid 50000000-2000-0000-0000-000000000009)
+  )
+
+  (text "Component Summary - Digital Section\n\nActive ICs:\nU4: 74HC541PWR (TSSOP-20) - Octal buffer\nU8: MCP2562T-E/SN (SOIC-8) - CAN transceiver\n\nResistors (0603):\nR50-R51: 2.2kΩ (I2C pull-ups)\nR80-R81: 49.9Ω (CAN 50Ω matching)\nR82:     120Ω 1% (CAN termination)\n\nCapacitors:\nC61: 0.1µF (0603) - U8 bypass\nC62: 10µF (0805) - U8 bulk\n\nProtection Diodes:\nD12, D14: BAT54S (SOT-23) - Schottky\nD13, D15: PESD5V0S1BL (SOT-23) - TVS/ESD\n\nConnectors:\nJ5:  IDC-16 shrouded (2×8) - LA/AD9851\nJ6:  Pin header 1×5 - SPI\nJ7:  Pin header 1×3 - I2C\nJ8:  Pin header 1×3 - UART\nJ9:  SMA edge-mount - CAN-H (SMA6)\nJ10: SMA edge-mount - CAN-L (SMA7)\nJP1: Pin header 1×2 - CAN termination"
+    (at 40 310 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 50000000-2000-0000-0000-000000000010)
+  )
+
+  (text "PCB Layout Notes - Digital Section\n\n1. CAN Differential Pair:\n   • Route CAN-H and CAN-L as differential pair\n   • Keep traces parallel and equal length\n   • Impedance: 120Ω differential\n   • Clearance: 3x trace width from other signals\n\n2. SMA Placement:\n   • SMA6 (CAN-H) and SMA7 (CAN-L) adjacent\n   • Label clearly on silkscreen\n   • Both on front panel edge\n\n3. Termination:\n   • Place R82 (120Ω) close to MCP2562\n   • JP1 jumper accessible (not under board)\n\n4. Buffer (74HC541):\n   • 0.1µF bypass cap close to VCC pin\n   • Ground plane under IC\n\n5. Protocol Headers:\n   • J6, J7, J8 grouped together\n   • Easy probe access\n   • Clear labeling\n\n6. Keep digital signals away from\n   analog section (separate ground planes)"
+    (at 200 310 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 50000000-2000-0000-0000-000000000011)
+  )
+
+)

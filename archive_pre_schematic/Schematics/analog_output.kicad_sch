@@ -1,0 +1,108 @@
+(kicad_sch (version 20211123) (generator eeschema)
+
+  (uuid 3b8d5f6e-7c4d-5e8f-9f0a-2c3d4e5f6a7b)
+
+  (paper "A3")
+
+  (title_block
+    (title "Analog Output Section")
+    (date "2025-01-08")
+    (rev "1.0")
+    (company "DIY Training Project")
+    (comment 1 "DAC buffers, PWM filters, signal conditioning")
+    (comment 2 "6 SMA outputs + ADC input for DSP training")
+  )
+
+  (lib_symbols
+    ; Standard library symbols would go here - simplified for this example
+    ; In real KiCad, these would reference the actual library files
+  )
+
+  (hierarchical_label "DAC0" (shape input) (at 30 40 180)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid 20000000-1000-0000-0000-000000000001)
+  )
+  (hierarchical_label "DAC1" (shape input) (at 30 80 180)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid 20000000-1000-0000-0000-000000000002)
+  )
+  (hierarchical_label "PWM0" (shape input) (at 30 120 180)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid 20000000-1000-0000-0000-000000000003)
+  )
+  (hierarchical_label "PWM1" (shape input) (at 30 160 180)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid 20000000-1000-0000-0000-000000000004)
+  )
+  (hierarchical_label "PWM2" (shape input) (at 30 200 180)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid 20000000-1000-0000-0000-000000000005)
+  )
+  (hierarchical_label "ADC_IN" (shape output) (at 30 240 180)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid 20000000-1000-0000-0000-000000000006)
+  )
+  (hierarchical_label "+3.3VA" (shape input) (at 30 280 180)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid 20000000-1000-0000-0000-000000000007)
+  )
+  (hierarchical_label "GNDA" (shape input) (at 30 290 180)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid 20000000-1000-0000-0000-000000000008)
+  )
+
+  (text "DAC0 Output Buffer → SMA1\n\nCircuit:\nFRDM DAC0 (P4_30, 12-bit, 1MSPS)\n↓\nMCP6002 op-amp (unity gain buffer)\n↓\n47Ω series resistor (damping)\n↓\nSMA1 connector\n\nSignal range: 0-3.3V, DC-500kHz"
+    (at 40 20 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 50000000-1000-0000-0000-000000000001)
+  )
+
+  (text "DAC1 Output Buffer → SMA2\n\nCircuit:\nFRDM DAC1 (P4_31, 14-bit, 5MSPS)\n↓\nMCP6002 op-amp (unity gain buffer)\n↓\n47Ω series resistor (damping)\n↓\nOptional 10:1 voltage divider (for small signals)\n↓\nSMA2 connector\n\nSignal range: 0-3.3V or 0-330mV, DC-2MHz"
+    (at 40 60 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 50000000-1000-0000-0000-000000000002)
+  )
+
+  (text "PWM0 Filtered Output → SMA3\n\nCircuit:\nFRDM PWM0 (P0_24)\n↓\nRC low-pass filter (1kHz cutoff)\n  R=10kΩ, C=10µF\n↓\nMCP6002 op-amp buffer\n↓\n47Ω series resistor\n↓\nSMA3 connector\n\nConverts PWM to analog voltage"
+    (at 40 100 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 50000000-1000-0000-0000-000000000003)
+  )
+
+  (text "PWM1 Runt Generator → SMA4\n\nCircuit:\nFRDM PWM1 (P0_25)\n↓\nDifferentiator circuit (10pF cap)\n↓\nRunt pulse shaping\n↓\nSMA4 connector\n\nGenerates partial-swing pulses for signal integrity training"
+    (at 40 140 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 50000000-1000-0000-0000-000000000004)
+  )
+
+  (text "PWM2 Mixed Output → SMA5\n\nCircuit:\nFRDM PWM2 (P0_26)\n↓\nSoftware-controlled path selection\n  - Direct digital\n  - Filtered analog\n  - Attenuated (10:1)\n↓\nSMA5 connector\n\nVersatile output for various training exercises"
+    (at 40 180 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 50000000-1000-0000-0000-000000000005)
+  )
+
+  (text "ADC Input (DSP Training)\n\nCircuit:\nExternal signal input\n↓\nTVS diode protection (PESD5V0S1BL)\n↓\n1kΩ series resistor (current limiting)\n↓\n100pF anti-aliasing filter\n↓\nTo FRDM ADC (P4_0)\n\nProtected input for DSP signal processing demos"
+    (at 40 220 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 50000000-1000-0000-0000-000000000006)
+  )
+
+  (text "Component List:\n\nU1: MCP6002 (SOIC-8) - Dual op-amp for DAC0/DAC1\nU2: MCP6002 (SOIC-8) - Dual op-amp for PWM filters\nU3: MCP6002 (SOIC-8) - Dual op-amp for buffers\n\nResistors (0603):\nR1-R6: 47Ω (SMA series damping)\nR7-R9: 10kΩ (filter/dividers)\nR10-R12: 1kΩ (various)\n\nCapacitors:\nC1-C6: 0.1µF (0603) - Coupling/bypass\nC7-C9: 10µF (0805) - Filter\nC10-C12: 10pF (0603) - Runt circuits\nC13-C15: 100pF (0603) - Anti-aliasing\n\nProtection:\nD1-D6: PESD5V0S1BL (TVS diodes)\nD7-D12: BAT54S (Schottky diodes)\n\nConnectors:\nJ1-J5: SMA edge-mount connectors\nJ6: IDC-16 header (AD9851 interface)"
+    (at 200 40 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 50000000-1000-0000-0000-000000000007)
+  )
+
+  (text "IMPORTANT NOTES:\n\n1. All op-amps are unity gain buffers\n   (non-inverting configuration)\n\n2. 47Ω series resistors provide damping\n   and approximate 50Ω output impedance\n\n3. TVS diodes protect against ESD\n   and overvoltage conditions\n\n4. Bypass capacitors (0.1µF) must be\n   placed close to each IC power pin\n\n5. SMA connector shells connect to GNDA\n\n6. Keep analog traces away from\n   digital clock signals\n\n7. Use ground plane under analog section"
+    (at 200 140 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 50000000-1000-0000-0000-000000000008)
+  )
+
+  (text "Signal Path Summary:\n\nSMA1 (DAC0):     0-3.3V, DC-500kHz\nSMA2 (DAC1):     0-3.3V or 0-330mV, DC-2MHz  \nSMA3 (PWM0):     Filtered PWM, DC-1kHz\nSMA4 (PWM1):     Runt pulses for SI training\nSMA5 (PWM2):     Mixed/versatile output\n\nNOTE: SMA6 and SMA7 are used for CAN-H\nand CAN-L in the Digital Protocols section.\n\nAD9851 DDS output available via IDC-16\nconnector (software-switchable to LA mode)."
+    (at 200 220 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 50000000-1000-0000-0000-000000000009)
+  )
+
+)
